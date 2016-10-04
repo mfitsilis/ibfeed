@@ -56,10 +56,10 @@ update ltime time from ibreqhist[enlist[`AAPL;`STK;`SMART;`USD;`$"20160715 23:59
 date2dstr:{(,) over enlist[ssr[($).z.D-x;".";""];" 23:59:59"]}
 get2dhist:{[a;b;c;d]update ltime time from ibreqhist[enlist[a;b;c;d;`$date2dstr[0];`$"2 D";`$"1 min";$[`STK=b;`TRADES;`MIDPOINT];`$"1";`$"2"]] }
 get2dhist[`AAPL;`STK;`SMART;`USD]
-```
 
 /use ltime to correct time to local exchange time:
 update ltime time from ibreqhist[enlist[`AAPL;`STK;`SMART;`USD;`$"20160927 23:59:59";`$"10 D";`$"1 min";`TRADES;`1;`2]]
+```
 
 All functions take a single argument but it is sometimes a list of symbols, because it is easier<br>
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
