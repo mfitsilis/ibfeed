@@ -67,4 +67,4 @@ All functions take a single argument but it is sometimes a list of symbols, beca
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
 
 License is for [non-commercial](http://interactivebrokers.github.io/) use and most of the source code is ib sourced files anyway. <br>
-Files Modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h.
+This project builds on the C++ example provided in the ib api and the files modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h.

@@ -15,5 +15,3 @@ all:
 
 clean:
 	del EClientSocketBase.obj EPosixClientSocket.obj PosixTestClient.obj ibfeed.obj $(OUTPUT)
-
-
