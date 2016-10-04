@@ -37,7 +37,7 @@ Because the hostname cannot be resolved(will correct this at some point) you can
 ipaddr:`${11_(first x ss ":")#x} sum 1#2_system "ping -n 1 -4 mic-asus"<br>
 /connect to ip address,port,as clientid
 ibconnect[enlist[`192.168.1.10;`7496;`10]]
-ibconnect[enlist[ipaddq;`7496;`10]]
+ibconnect[enlist[ipaddr;`7496;`10]]
 ibdisconnec[]
 ibisconnected[]
 /writes to file xmlparams.xml (about 370kb long!)
