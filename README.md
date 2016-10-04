@@ -48,7 +48,7 @@ ibreqscansub
 ibreqtime[]
 /returns the next orderid
 ibreqids[]
-/SYM,EXCH,CUR,SECTYPE,TRANSMIT(1/0),OrderID,ACTION,QTY,TYPE,AUXPRC,LMTPRC,TIF,OCAGRP,ORDREF,GAT(eg. 20161004 10:00:00)
+/SYM,EXCH,CUR,SECTYPE,TRANSMIT(1/0),OrderID,ACTION,QTY,TYPE,AUXPRC,LMTPRC,TIF,OCAGRP,ORDREF,GAT(eg. 20161004 10:00:00 in order to use convert to symbol `$"20161004 10:00:00" )
 ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1;`238;`BUY;`10;`LMT;`;`113;`;`DAY;`;`;`]]
 /cancels order using orderid
 ibcancelorder[220]
