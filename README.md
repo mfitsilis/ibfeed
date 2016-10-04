@@ -25,7 +25,7 @@ I think this is best done in a separate process with an executable and I will pr
 one at a later point.<br>
 Most important in this library is the historical data request and order transmission.<br>
 
-The makefile is works with MS Visual C++ 14. It has been tested with the 32bit kdb+ version 3.2<br>
+The makefile works with MS Visual C++ 14. It has been tested with the 32bit kdb+ version 3.2<br>
 and the 32bit c.dll. Both this and the ibfeed dll must be copied inside the c:\q\w32<br>
 directory where q.exe resides. build.bat builds the dll using the makefile and copies it<br>
 inside the q directory.<br>
