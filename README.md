@@ -29,19 +29,17 @@ directory where q.exe resides.<br>
 
 Here are a few examples:
 
-Because the hostname cannot be resolved(will correct this at some point) you can use<br>
-ping to find it.<br>
-reqscanparams writes to file xmlparams.xml (about 370kb long!)<br>
+Because the hostname cannot be resolved(will correct this at some point) you can use ping to find it.<br>
 
 ```
 /resolve ip address
 ipaddr:`${11_(first x ss ":")#x} sum 1#2_system "ping -n 1 -4 mic-asus"<br>
 /connect to ip address,port,as clientid
-ibconnect[enlist[`192.168.1.10;`7496;`10]]<br>
+ibconnect[enlist[`192.168.1.10;`7496;`10]]
 ibconnect[enlist[ipaddq;`7496;`10]]
 ibdisconnec[]
 ibisconnected[]
-/creates xml file
+/writes to file xmlparams.xml (about 370kb long!)
 ibreqscanparams[]
 /returns result of stock scanner
 ibreqscansub
