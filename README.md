@@ -64,6 +64,12 @@ get2dhist[`AAPL;`STK;`SMART;`USD]
 update ltime time from ibreqhist[enlist[`AAPL;`STK;`SMART;`USD;`$"20160927 23:59:59";`$"10 D";`$"1 min";`TRADES;`1;`2]]
 ```
 
+About the ibreqhist function it is important to remember that the pacing limitations of ib only<br>
+allows one call every 10 sec(specifically no more than 60 in 10mins). <br>
+Each call can get a max. of 10days of 1min data. Because of that it takes roughly 1hour<br>
+to download a decade of 1min historical data of one stock. One way to do it is by using the kdb timer. 
+
+
 All functions take a single argument but it is sometimes a list of symbols, because it is easier<br>
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
 
