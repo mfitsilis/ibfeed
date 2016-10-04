@@ -20,7 +20,7 @@ Using the 2: kdb function the dll is accessed.<br>
 The dll uses the tws api 9.71. Unlike the github project [Qinteractivebrokers](https://github.com/mortensorensen/QInteractiveBrokers) it doesn't use<br>
 [Rudi Meier's TWS API](https://github.com/rudimeier/twsapi), which I had trouble
 building anyway.<br>
-It's purpose is not a feedhandler to asynchronously stream quotes to a kdb+ process.<br>
+Its purpose is not a feedhandler to asynchronously stream quotes to a kdb+ process.<br>
 I think this is best done in a separate process with an executable and I will probably upload<br>
 one at a later point.<br>
 Most important in this library is the historical data request and order transmission.<br>
