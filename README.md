@@ -65,5 +65,5 @@ update ltime time from ibreqhist[enlist[`AAPL;`STK;`SMART;`USD;`$"20160927 23:59
 All functions take a single argument but it is sometimes a list of symbols, because it is easier<br>
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
 
-License is for [non-commercial](http://interactivebrokers.github.io/) use and most of the source code is ib sourced files anyway. 
+License is for [non-commercial](http://interactivebrokers.github.io/) use and most of the source code is ib sourced files anyway. <br>
 Files Modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h.
