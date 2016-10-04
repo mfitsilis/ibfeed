@@ -23,6 +23,7 @@ building anyway.<br>
 It's purpose is not a feedhandler to asynchronously stream quotes to a kdb+ process.<br>
 I think this is best done in a separate process with an executable and I will probably upload<br>
 one at a later point.<br>
+Most important in this library is the historical data request and order transmission.<br>
 
 The makefile was prepared for MS Visual C++ 14. It was built for the 32bit kdb+ version 3.2<br>
 and uses the 32bit c.dll. Both this and the ibfeed dll must be copied inside the c:\q\w32<br>
