@@ -3,6 +3,7 @@ ibconnect
 isconnected
 disconnect
 reqtime
+reqids
 placeorder
 cancelorder
 reqhist

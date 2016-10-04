@@ -12,6 +12,7 @@ ibreqscanparams:`ibfeed 2:(`reqscanparams;1)
 ibreqscansub:`ibfeed 2:(`reqscansub;1)
 ibreqtime:`ibfeed 2:(`reqtime;1)
 ibreqhist:`ibfeed 2:(`reqhist;1)
+ibreqids:`ibfeed 2:(`reqids;1)
 ibplaceorder:`ibfeed 2:(`placeorder;1)
 ibcancelorder:`ibfeed 2:(`cancelorder;1)
 ```
@@ -45,7 +46,9 @@ ibreqscanparams[]
 ibreqscansub
 /prints the server time
 ibreqtime[]
-/SYM,EXCH,CUR,SECTYPE,TRANSMIT,OID,ACTION,QTY,TYPE,AUXPRC,LMTPRC,TIF,OCAGRP,ORDREF,GAT
+/returns the next orderid
+ibreqids[]
+/SYM(AAPL),EXCH(SMART),CUR,SECTYPE,TRANSMIT(1/0),OID,ACTION,QTY,TYPE,AUXPRC,LMTPRC,TIF,OCAGRP,ORDREF,GAT(eg. 20161004 10:00:00) default values in brackets
 ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1;`238;`BUY;`10;`LMT;`;`113;`;`DAY;`;`;`]]
 /cancels order using orderid
 ibcancelorder[220]

@@ -49,6 +49,7 @@ public:
 	void reqHistData(Contract c,Histstruct hs);
 	void reqscanparams();
 	void reqscansub();
+	void reqids();
 	
 //private:
 	void placeOrder(Contract c,Order o);

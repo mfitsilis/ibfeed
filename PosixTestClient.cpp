@@ -29,6 +29,7 @@ std::vector<int> vo;
 extern std::string scannerparams;
 extern std::string curtimestr;
 std::ostringstream strm;
+extern int nextid;
 
 //http://stackoverflow.com/questions/3418231/replace-part-of-a-string-with-another-string#3418285
 bool replace(std::string& str, const std::string& from, const std::string& to) {
@@ -201,6 +202,11 @@ void PosixTestClient::processMessages()
 //////////////////////////////////////////////////////////////////
 // methods
 
+void PosixTestClient::reqids()
+{	
+	m_pClient->reqIds(1); //reserve 1 orderId -> result in nextValidId()
+}
+
 void PosixTestClient::placeOrder(Contract c, Order o){
 	finish=1;
 	m_pClient->placeOrder(o.orderId, c, o);
@@ -274,9 +280,11 @@ void PosixTestClient::historicalData(TickerId reqId, const IBString& date, doubl
 }
 void PosixTestClient::nextValidId( OrderId orderId)
 {	//is called on twsconnect
-	m_orderId = orderId;
+//	m_orderId = orderId;
 //	printf("m_orderId=%d\n",m_orderId);	
 //	m_state = ST_PLACEORDER;
+	nextid=orderId;
+	finish=1;
 }
 void PosixTestClient::position( const IBString& account, const Contract& contract, int position, double avgCost) {
 }

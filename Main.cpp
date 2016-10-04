@@ -30,6 +30,7 @@ extern K khist=0;
 extern K kcontr=0;
 extern std::string scannerparams="";
 extern std::string curtimestr="";
+extern int nextid=0;
 
 //{11_(first x ss ":")#x} sum 1#2_system "ping -n 1 -4 mic-asus"   / get micasus ip
 //do NOT use exit(), it exits kdb!
@@ -113,7 +114,22 @@ extern "C" K reqtime(K ignore){
 				std::copy(curtimestr.begin(), curtimestr.end(), str);
 				str[curtimestr.size()] = '\0';
 				return ks(ss(str));
-				//break; 
+			}
+		}
+	}
+	
+	return 0;
+}
+
+extern "C" K reqids(K ignore){
+	if(client.isConnected()) {
+		client.reqids();
+		while( client.isConnected()) {
+			client.processMessages();
+	
+			if(finish==1) { 
+				finish=0;
+				return ki(nextid);
 			}
 		}
 	}
@@ -124,23 +140,26 @@ extern "C" K reqtime(K ignore){
 extern "C" K placeorder(K contr){
 		Contract c;
 		Order o;
+		std::string auxprc,lmtprc;
+		auxprc=kS(contr)[9];
+		lmtprc=kS(contr)[10];
 	if(client.isConnected()) {
 		c.symbol =   		kS(contr)[0]; //"AAPL";
 		c.exchange = 		kS(contr)[1]; //"SMART";
 		c.currency = 		kS(contr)[2]; //"USD";
 		c.secType =  		kS(contr)[3]; //"STK";
-		o.transmit  = 	(bool)kS(contr)[4];//true
+		o.transmit  = (bool)std::stoi(kS(contr)[4]);//true
 		o.orderId = std::stoi(kS(contr)[5]);
 		o.action =   		kS(contr)[6]; //"BUY";
 		o.totalQuantity = std::stoi(kS(contr)[7]); //10
 		o.orderType = 		kS(contr)[8]; //"LMT";
-		o.auxPrice = 	std::stof(kS(contr)[9]); //112.1;
-		o.lmtPrice = 	std::stof(kS(contr)[10]); //112.1;
+		o.auxPrice = 	auxprc.empty()?0.0:std::stof(kS(contr)[9]); //112.1;
+		o.lmtPrice = 	lmtprc.empty()?0.0:std::stof(kS(contr)[10]); //112.1;
 		o.tif = 			kS(contr)[11]; //"DAY";
 		o.ocaGroup =	    kS(contr)[12];
 		o.orderRef =	    kS(contr)[13];
-		o.goodAfterTime=  kS(contr)[14]; //"09:30:00";
-
+		o.goodAfterTime=  kS(contr)[14]; //20161004 10:00:00;
+		//ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1;`238;`BUY;`10;`LMT;`;`112;`DAY;`;`;`]]
 		client.placeOrder(c,o);
 		while( client.isConnected()) {
 			client.processMessages();
