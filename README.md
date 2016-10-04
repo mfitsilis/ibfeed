@@ -27,7 +27,8 @@ Most important in this library is the historical data request and order transmis
 
 The makefile is works with MS Visual C++ 14. It has been tested with the 32bit kdb+ version 3.2<br>
 and the 32bit c.dll. Both this and the ibfeed dll must be copied inside the c:\q\w32<br>
-directory where q.exe resides.<br>
+directory where q.exe resides. build.bat builds the dll using the makefile and copies it<br>
+inside the q directory.<br>
 
 Here are a few examples:
 
@@ -67,4 +68,4 @@ All functions take a single argument but it is sometimes a list of symbols, beca
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
 
 License is for [non-commercial](http://interactivebrokers.github.io/) use and most of the source code is ib sourced files anyway. <br>
-This project builds on the C++ example provided in the ib api and the files modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h.
+This project builds on the C++ example provided in the ib api and the files modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h. Directories src and Shared are not included here because of a clause that the api code is not to be published(?)!
