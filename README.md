@@ -65,7 +65,7 @@ update ltime time from ibreqhist[enlist[`AAPL;`STK;`SMART;`USD;`$"20160927 23:59
 ```
 
 About the ibreqhist function it is important to remember that the pacing limitations of ib only<br>
-allows one call every 10 sec(specifically no more than 60 in 10mins). <br>
+allow one call every 10 sec(specifically no more than 60 in 10mins). <br>
 Each call can get a max. of 10days of 1min data. Because of that it takes roughly 1hour<br>
 to download a decade of 1min historical data of one stock. One way to do it is by using the kdb timer. 
 
@@ -74,4 +74,4 @@ All functions take a single argument but it is sometimes a list of symbols, beca
 to handle both in kdb(using enlist) and in c++(using kS(kparam)[0]).<br>
 
 License is for [non-commercial](http://interactivebrokers.github.io/) use and most of the source code is ib sourced files anyway. <br>
-This project builds on the C++ example provided in the ib api and the files modified where Main.cpp, PosixTestClient.cpp and PosixTestClient.h. Directories src and Shared are not included here because of a clause that the api code is not to be published.
+This project builds on the C++ example provided in the ib api and the files modified were Main.cpp, PosixTestClient.cpp and PosixTestClient.h. Directories src and Shared are not included here because of a condition that the api code is not to be published.
