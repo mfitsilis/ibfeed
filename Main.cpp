@@ -19,8 +19,6 @@
 
 #include "PosixTestClient.h"
 
-const unsigned MAX_ATTEMPTS = 5;
-const unsigned SLEEP_TIME = 10;
 extern int finish=0;
 extern int reconnect=0;
 
@@ -31,12 +29,14 @@ extern K kcontr=0;
 extern std::string scannerparams="";
 extern std::string curtimestr="";
 extern int nextid=0;
+extern int oid=0;
 
 //{11_(first x ss ":")#x} sum 1#2_system "ping -n 1 -4 mic-asus"   / get micasus ip
 //do NOT use exit(), it exits kdb!
 extern "C" K ibconnect(K host){ //single arg -> default port,clientId
 	unsigned int port = 7496;
 	int clientId = 9;
+	oid=0;
 	if(client.isConnected()) {
 		return 0;
 	} else {

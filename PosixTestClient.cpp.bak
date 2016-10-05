@@ -28,7 +28,6 @@ extern std::string scannerparams;
 extern std::string curtimestr;
 std::ostringstream strm;
 extern int nextid;
-extern int oid;
 
 //http://stackoverflow.com/questions/3418231/replace-part-of-a-string-with-another-string#3418285
 bool replace(std::string& str, const std::string& from, const std::string& to) {
@@ -114,7 +113,10 @@ void PosixTestClient::processMessages()
 	struct timeval tval;
 	tval.tv_usec = 0;
 	tval.tv_sec = 0;
+	tval.tv_sec = 5;
 
+	time_t now = time(NULL);
+	
 	if( m_pClient->fd() >= 0 ) {
 
 		FD_ZERO( &readSet);
@@ -126,9 +128,9 @@ void PosixTestClient::processMessages()
 			FD_SET( m_pClient->fd(), &writeSet);
 
 		FD_SET( m_pClient->fd(), &errorSet);
-
+		
 		int ret = select( m_pClient->fd() + 1, &readSet, &writeSet, &errorSet, &tval);
-
+		
 		if( ret == 0) { // timeout
 			return;
 		}
@@ -162,6 +164,7 @@ void PosixTestClient::processMessages()
 			m_pClient->onReceive();
 		}
 	}
+
 }
 
 //////////////////////////////////////////////////////////////////
@@ -184,7 +187,7 @@ void PosixTestClient::cancelOrder(long orderId){
 
 ///////////////////////////////////////////////////////////////////
 // events
-double zu(int u){return u/8.64e4-10957;} //convert seconds since epoch to kdb datetime format(float since 2000.01.01)
+double zu(int u){return u/8.64e4-10957;}
 
 void PosixTestClient::orderStatus( OrderId orderId, const IBString &status, int filled,
 	   int remaining, double avgFillPrice, int permId, int parentId,
@@ -244,11 +247,9 @@ void PosixTestClient::historicalData(TickerId reqId, const IBString& date, doubl
 		}
 }
 void PosixTestClient::nextValidId( OrderId orderId)
-{	//is called on twsconnect!
+{	//is called on twsconnect
 	nextid=orderId;
-	
-	if(oid>0) finish=1;
-	oid++;
+	finish=1;
 }
 void PosixTestClient::position( const IBString& account, const Contract& contract, int position, double avgCost) {
 }
@@ -266,7 +267,7 @@ void PosixTestClient::currentTime( long time)
 		strm.str(std::string());;
 		strm << "The current server date/time is: " << asctime(timeinfo);
 		curtimestr=strm.str();
-						
+		
 		finish=1;
 }
 void PosixTestClient::reqscanparams(){
