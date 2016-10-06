@@ -16,9 +16,11 @@
 #include "Contract.h"
 #include "Order.h"
 #include <iostream>
+#include <time.h>
 
 #include "PosixTestClient.h"
 
+const int MAXWAIT = 1;
 extern int finish=0;
 extern int reconnect=0;
 
@@ -29,6 +31,7 @@ extern K kcontr=0;
 extern std::string scannerparams="";
 extern std::string curtimestr="";
 extern int nextid=0;
+extern int nextvid=-1;
 extern int oid=0;
 
 //{11_(first x ss ":")#x} sum 1#2_system "ping -n 1 -4 mic-asus"   / get micasus ip
@@ -37,15 +40,31 @@ extern "C" K ibconnect(K host){ //single arg -> default port,clientId
 	unsigned int port = 7496;
 	int clientId = 9;
 	oid=0;
+	nextvid=-1;
+	time_t start,end;
+	time (&start);
 	if(client.isConnected()) {
 		return 0;
 	} else {
 		reconnect=0;
-		if(host->t<0)
-			client.connect( host->s, port, clientId);
-		else {
+//		if(host->t<0)
+//			client.connect( host->s, port, clientId);
+//		else 
+		{
 			client.connect(kS(host)[0],std::stoi(kS(host)[1]),std::stoi(kS(host)[2]));
 		}
+		client.reqids(); //because no message is sent on connection?
+		while( client.isConnected()) {
+			client.processMessages();
+			time (&end);
+			if(difftime(end,start)>MAXWAIT) { client.disconnect(); finish=0; return ki(-1); } //time is out	
+			if(finish==1) { 
+				finish=0;
+				return ki(nextid);
+			}
+			Sleep( 50);
+		}
+
 	}
 	return 0;
 }
@@ -75,6 +94,7 @@ extern "C" K reqscanparams(K ignore){
 		//		delete[] str;
 		//		return res;
 			}
+			Sleep( 50);
 		}
 	}	
 	return 0;
@@ -91,6 +111,7 @@ extern "C" K reqscansub(K ignore){
 				return 0;
 				//return ks(ss("scan"));
 			}
+			Sleep( 50);
 		}
 	}	
 	return 0;
@@ -103,11 +124,14 @@ extern "C" K isconnected(K ignore){
 }
 
 extern "C" K reqtime(K ignore){
+	time_t start,end;
+	time (&start);
 	if(client.isConnected()) {
 		client.reqCurrentTime();
 		while( client.isConnected()) {
 			client.processMessages();
-	
+			time (&end);
+			if(difftime(end,start)>MAXWAIT) return 0; //time is out
 			if(finish==1) { 
 				finish=0;
 				char * str = new char[curtimestr.size() + 1];
@@ -115,6 +139,7 @@ extern "C" K reqtime(K ignore){
 				str[curtimestr.size()] = '\0';
 				return ks(ss(str));
 			}
+			Sleep( 50);
 		}
 	}
 	
@@ -131,6 +156,7 @@ extern "C" K reqids(K ignore){
 				finish=0;
 				return ki(nextid);
 			}
+			Sleep( 50);
 		}
 	}
 	
@@ -179,7 +205,6 @@ extern "C" K cancelorder(K orderId){
 		client.cancelOrder(orderId->i);
 		while( client.isConnected()) {
 			client.processMessages();
-	
 			if(finish==1) { 
 				break; 
 			}
@@ -240,6 +265,7 @@ extern "C" K reqhist(K contr) {
 			if(finish==1) { 
 				break; 
 			}
+			Sleep( 50);
 		}
 	}
 

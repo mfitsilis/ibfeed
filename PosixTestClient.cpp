@@ -246,8 +246,7 @@ void PosixTestClient::historicalData(TickerId reqId, const IBString& date, doubl
 void PosixTestClient::nextValidId( OrderId orderId)
 {	//is called on twsconnect!
 	nextid=orderId;
-	
-	if(oid>0) finish=1;
+	if(oid>0) finish=1; //not for 1st connection
 	oid++;
 }
 void PosixTestClient::position( const IBString& account, const Contract& contract, int position, double avgCost) {
