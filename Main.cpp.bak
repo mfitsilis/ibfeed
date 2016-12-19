@@ -187,7 +187,7 @@ extern "C" K placeorder(K contr){
 		o.ocaGroup =	    kS(contr)[12];
 		o.orderRef =	    kS(contr)[13];
 		o.goodAfterTime=  kS(contr)[14]; //20161004 10:00:00;
-		//ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1;`238;`BUY;`10;`LMT;`;`100.0;`DAY;`;`;`]]
+		//ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1;`238;`BUY;`10;`LMT;`;`100.0;`;`DAY;`;`;`]]
 		//ibplaceorder[enlist[`AAPL;`SMART;`USD;`STK;`1 or 0;`id;`BUY;`qty;`LMT;`aux;`lmt;`DAY;`oca;`oref;`gat]]
 		client.placeOrder(c,o);
 		while( client.isConnected()) {

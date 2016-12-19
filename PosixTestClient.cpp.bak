@@ -23,7 +23,7 @@ extern K khist;
 extern K kcontr;
 //extern K res;
 std::vector<double> op,hi,lo,cl,vo,dat;
-//std::vector<int> vo;
+std::vector<int> vo;
 extern std::string scannerparams;
 extern std::string curtimestr;
 std::ostringstream strm;
